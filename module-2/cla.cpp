@@ -20,7 +20,7 @@ void printArguments(int argc, char *argv[])
 {
    // print arguments to screen
 
-   for (int i=1; i<argc; i++) c
+   for (int i=1; i<argc; i++) 
    {
       cout << "arg " << i << " = " << argv[i] << '\n';
    }
