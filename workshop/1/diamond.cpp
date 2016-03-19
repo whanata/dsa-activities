@@ -63,38 +63,6 @@ char getOutput(string question)
     return output;
 }
 
-// string getHalfDiamond(int halfSize, int actualSize, char border, char fill)
-// {
-//     string halfDiamond;
-//     int middle = actualSize / 2;
-
-//     for (int row = 0; row < halfSize; row++)
-//     {
-//         for (int column = 0; column < actualSize; column++)
-//         {
-//             int leastBorderValue = middle - row;
-//             int highestBorderValue = middle + row;
-
-//             if (column == highestBorderValue || column == leastBorderValue)
-//             {
-//                 halfDiamond += border;
-//             }
-//             else if (column < highestBorderValue && column > leastBorderValue)
-//             {
-//                 halfDiamond += fill;
-//             }
-//             else
-//             {
-//                 halfDiamond += " ";
-//             }
-//         }
-
-//         halfDiamond += "\n";
-//     }
-
-//     return halfDiamond;
-// }
-
 char getCorrectChar(int middle, int column, int row, char border, char fill)
 {
     int leastBorderValue = middle - row;
@@ -141,12 +109,12 @@ void printDiamond(int size, char border, char fill)
 
 int main(int argc, char *argv[]) 
 {
-    // int size = getSize();
-    // char border = getOutput("Please enter border: ");
-    // char fill = getOutput("Please enter fill: ");
-    int size = 15;
-    char border = '#';
-    char fill = '+';
+    int size = getSize();
+    char border = getOutput("Please enter border: ");
+    char fill = getOutput("Please enter fill: ");
+    // int size = 15;
+    // char border = '#';
+    // char fill = '+';
 
     printDiamond(size, border, fill);
 
