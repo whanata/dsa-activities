@@ -84,10 +84,8 @@ char getCorrectChar(int middle, int column, int row, char border, char fill)
 void printDiamond(int size, char border, char fill)
 {
     int middle = size / 2;
-    int firstHalfSize = middle;
-    int secondHalfSize = middle - 1;
 
-    for (int row = 0; row < firstHalfSize; row++)
+    for (int row = 0; row < middle; row++)
     {
         for (int column = 0; column < size; column++)
         {
@@ -96,7 +94,7 @@ void printDiamond(int size, char border, char fill)
         cout << "\n";
     }
 
-    for (int row = secondHalfSize; row >= 0; row--)
+    for (int row = middle; row >= 0; row--)
     {
         for (int column = 0; column < size; column++)
         {
