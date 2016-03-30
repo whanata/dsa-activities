@@ -23,18 +23,18 @@ bool checkSize(char *output)
     } 
     catch (invalid_argument)
     {
-        cout << sizeErrorMsg << "Please input only an integer.\n";
+        cerr << sizeErrorMsg << "Please input only an integer.\n";
         return false;
     }
 
     if (outputNum <= 0)
     {
-        cout << sizeErrorMsg << "Please input number above 0.\n";
+        cerr << sizeErrorMsg << "Please input number above 0.\n";
         return false;
     }
     else if (outputNum % 2 == 0)
     {
-        cout << sizeErrorMsg << "Please input an odd number.\n";
+        cerr << sizeErrorMsg << "Please input an odd number.\n";
         return false;
     }
 
@@ -45,7 +45,7 @@ bool checkOutput(string errMsg, char *output)
 {
     if (strlen(output) != 1)
     {
-        cout << errMsg << " Please input one character." << "\n";
+        cerr << errMsg << " Please input one character." << "\n";
         return false;
     }
 
@@ -136,7 +136,7 @@ void checkArgument(int argCount, char *argVariables[])
     }
     else
     {
-        cout << "Only allowed 3 arguments\n";
+        cerr << "Only allowed 3 arguments\n";
     }
 
     if (correctArguments == false)
