@@ -8,9 +8,9 @@ bool checkSize(string output);
 bool checkOutput(string errMsg, string output);
 void printDiamond(int size, char border, char fill);
 char getCorrectChar(int middle, int row, char border, char fill, char size);
-void intializeDiamonArray(char **diamondArray, int size);
+void intializeDiamonArray(char *diamondArray[], int size);
 void checkArgument(int argCount, char *argVariables[]);
-void print2dArray(char **diamondArray);
+void print2dArray(char *diamondArray[]);
 
 bool checkSize(char *output)
 {
@@ -77,7 +77,7 @@ char getCorrectChar(int middle, int column, int row, char border, char fill, cha
     }
 }
 
-void intializeDiamonArray(char **diamondArray, int size)
+void intializeDiamonArray(char *diamondArray[], int size)
 {
     for (int row = 0; row < size; row++)
     {
@@ -85,7 +85,7 @@ void intializeDiamonArray(char **diamondArray, int size)
     }
 }
 
-void print2dArray(char **diamondArray, int size)
+void print2dArray(char *diamondArray[], int size)
 {
     for (int row = 0; row < size; row++)
     {
