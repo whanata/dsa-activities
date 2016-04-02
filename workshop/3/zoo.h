@@ -13,8 +13,6 @@ class zoo
    private: 
       stock *stocks; 
       int size;
-      string originalFileName;
-      string copyFileName;
       
    public: 
       void loadZoo(string file);
@@ -24,13 +22,13 @@ class zoo
       int numClass(string className);
       bool checkInt(string text);
       void getSize(bool &gotSize, string text);
+      void getStock(bool gotSize, int &stockCounter, int &counter, string *stringList, string text);
+      bool checkChar(string text);
 
       zoo() 
       { 
          size = 0; 
-         stocks = NULL; 
-         originalFileName = "";
-         copyFileName = "";
+         stocks = new stock[size]; 
       } 
       
       zoo(const zoo &other) 

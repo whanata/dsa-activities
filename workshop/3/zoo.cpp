@@ -1,21 +1,21 @@
 #include <iostream>
-// #include <string>
 #include <fstream>
 #include <cstdlib>
 #include <string.h>
 
 #include "zoo.h"
+#include "stock.h"
 
 using namespace std;
 
 void zoo::loadZoo(string file)
 {
     ifstream fin;
+    string *stringList = new string[6];
     string text = "";
     bool gotSize = false;
-    int counterStock = 0;
-
-    this->originalFileName = file;
+    int counter = 0;
+    int stockCounter = 0;
 
     // open stream to file
     fin.open(file.c_str());
@@ -28,12 +28,12 @@ void zoo::loadZoo(string file)
     {
         while (!fin.eof()) 
         {
-            fin >> text;
+            getline(fin, text);
             if (fin.good()) 
             {
+                this->getStock(gotSize, stockCounter, counter, stringList, text);
                 this->getSize(gotSize, text);
-
-                cout << text << "\n"; 
+                // cout << text << "\n";
             } 
             else if (!fin.eof()) 
             {
@@ -45,11 +45,13 @@ void zoo::loadZoo(string file)
     catch (exception &ex)
     {
         cout << "\nERROR - Exception thrown\n" << ex.what() << "\n";
+        delete [] stringList;
         fin.close();
     }
 
-   // we have finished reading the file, close the stream to it
-   fin.close();
+    delete [] stringList;
+    // we have finished reading the file, close the stream to it
+    fin.close();
 
 }
 
@@ -69,7 +71,32 @@ void zoo::getSize(bool &gotSize, string text)
     }
 }
 
-// void zoo::getStock(bool &gotSize, )
+void zoo::getStock(bool gotSize, int &stockCounter, int &counter, string *stringList, string text)
+{
+    if (gotSize == true)
+    {
+        stringList[counter] = text;
+        cout << counter << ": " << text << "\n";
+
+        if (counter >= 5)
+        {
+            counter = -1;
+            for (int i = 0; i < 6; i++)
+            {
+                // cout << stringList[i] << "\n";
+            }
+            // cout << stringList[5];
+            // stock currentStock = stock(stringList[0], stringList[1], stringList[2], stringList[3], stringList[4], stringList[5]);
+            // this->stocks[0] = &currentStock;
+            this->stocks[0].setStock(stringList[0], stringList[1], stringList[2], stringList[3], stringList[4], stringList[5]);
+            stockCounter ++;
+
+            // stringList[counter] = text;
+        }  
+
+        counter ++;
+    }
+}
 
 void zoo::saveZoo(string file)
 {
@@ -100,7 +127,18 @@ bool zoo::checkInt(string text)
     }
     else
     {
-        // cout << text << "\n";
+        return false;
+    }
+}
+
+bool zoo::checkChar(string text)
+{
+    if (text.size() == 1)
+    {
+        return true;
+    }
+    else
+    {
         return false;
     }
 }

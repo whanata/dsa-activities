@@ -6,11 +6,11 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {  
-   zoo myZoo;
    if (argc == 3)
    {
       try
       {
+         zoo myZoo;
          myZoo.loadZoo(argv[1]);
          
          cout << "Num Stock = " << myZoo.getNumstock() << "\n";

@@ -1,7 +1,8 @@
 #ifndef STOCK_H 
 #define STOCK_H
 
-#include <string>
+#include <string.h>
+#include <cstdlib>
 
 #include "animal.h"
 
@@ -16,6 +17,24 @@ class stock
         string enclosurePen;
 
     public:
+        bool checkInt(string text);
+        bool checkChar(string text);
+
+        stock()
+        {
+            stockId = 0;
+            char gender = 0;
+            string enclosurePen = "";
+        }
+
+        void setStock(string stockId, string gender, string enclosurePen, string name, string genus, string species)
+        {
+            cout << stockId << "\n";
+            // if (this->checkInt(stockId))
+            // {
+            //     this->stockId = atoi(stockId.c_str());
+            // }
+        }
         
 };
 

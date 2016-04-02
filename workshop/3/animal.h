@@ -13,6 +13,19 @@ class animal
         string species;
 
     public:
+        animal()
+        {
+            name = "";
+            genus = "";
+            species = "";
+        }
+
+        animal(string name, string genus, string species)
+        {
+            this->name = name;
+            this->genus = genus;
+            this->species = species;
+        }
 
 };
 
