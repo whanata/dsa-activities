@@ -24,11 +24,12 @@ class zoo
       void getSize(bool &gotSize, string text);
       void getStock(bool gotSize, int &stockCounter, int &counter, string *stringList, string text);
       bool checkChar(string text);
+      string getString() const;
 
       zoo() 
       { 
          size = 0; 
-         stocks = new stock[size]; 
+         stocks = NULL;
       } 
       
       zoo(const zoo &other) 

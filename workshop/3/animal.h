@@ -1,7 +1,9 @@
 #ifndef ANIMAL_H 
 #define ANIMAL_H
 
-#include <string>
+#include <string.h>
+#include <cstdlib>
+#include <stdexcept>
 
 using namespace std;
 
@@ -13,6 +15,9 @@ class animal
         string species;
 
     public:
+        string getName() const;
+        string getString() const;
+
         animal()
         {
             name = "";

@@ -1,6 +1,6 @@
 CC = g++ 
 prog: main.o zoo.o
-	$(CC) main.o zoo.o -o zooProgram
+	$(CC) main.o zoo.o stock.o animal.o -o zooProgram
 main.o: main.cpp zoo.h
 	$(CC) -c main.cpp
 zoo.o: zoo.cpp zoo.h stock.o

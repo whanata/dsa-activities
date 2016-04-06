@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string.h>
+#include <sstream>
 
 #include "stock.h"
 
@@ -29,4 +30,31 @@ bool stock::checkChar(string text)
     {
         return false;
     }
+}
+
+string stock::getEnclosurePen() const
+{
+    return this->enclosurePen;
+}
+
+animal stock::getAnimal() const
+{
+    return this->currentAnimal;
+}
+
+string stock::getString() const
+{
+    stringstream ss;
+    string stockIdString = "";
+    string genderString = "";
+
+    ss << this->stockId;
+    stockIdString = ss.str();
+    ss.str("");
+
+    ss << this->gender;
+    genderString = ss.str();
+    ss.str("");
+
+    return stockIdString + "\n" + genderString + "\n" + this->enclosurePen + "\n" + this->currentAnimal.getString();
 }

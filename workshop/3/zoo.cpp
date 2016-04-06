@@ -2,9 +2,9 @@
 #include <fstream>
 #include <cstdlib>
 #include <string.h>
+#include <sstream>
 
 #include "zoo.h"
-#include "stock.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ void zoo::loadZoo(string file)
     int stockCounter = 0;
 
     // open stream to file
-    fin.open(file.c_str());
+    fin.open(file.c_str(), ios::in);
     if (!fin) 
     {
         throw runtime_error("Can't open " + file);
@@ -62,6 +62,7 @@ void zoo::getSize(bool &gotSize, string text)
         if (this->checkInt(text))
         {
             this->size = atoi(text.c_str());
+            this->stocks = new stock[this->size];
             gotSize = true;
         }
         else
@@ -81,17 +82,9 @@ void zoo::getStock(bool gotSize, int &stockCounter, int &counter, string *string
         if (counter >= 5)
         {
             counter = -1;
-            for (int i = 0; i < 6; i++)
-            {
-                // cout << stringList[i] << "\n";
-            }
-            // cout << stringList[5];
-            // stock currentStock = stock(stringList[0], stringList[1], stringList[2], stringList[3], stringList[4], stringList[5]);
-            // this->stocks[0] = &currentStock;
-            this->stocks[0].setStock(stringList[0], stringList[1], stringList[2], stringList[3], stringList[4], stringList[5]);
-            stockCounter ++;
 
-            // stringList[counter] = text;
+            this->stocks[stockCounter]= stock(stringList[0], stringList[1], stringList[2], stringList[3], stringList[4], stringList[5]);
+            stockCounter ++;
         }  
 
         counter ++;
@@ -100,7 +93,45 @@ void zoo::getStock(bool gotSize, int &stockCounter, int &counter, string *string
 
 void zoo::saveZoo(string file)
 {
+    ofstream fout;
 
+    fout.open(file.c_str(), ios::out);
+    if (!fout) 
+    {
+        throw runtime_error("Can't open " + file);
+    }
+
+    try
+    {
+        fout << this->getString();
+    }
+    catch (exception &ex)
+    {
+        cout << "\nERROR - Exception thrown\n" << ex.what() << "\n";
+        fout.close();
+    }
+
+    fout.close();
+}
+
+string zoo::getString() const
+{
+    stringstream ss;
+    string zooString = "";
+
+    ss << this->size;
+    zooString = ss.str();
+    ss.str("");
+
+    zooString += "\n";
+    // cout << zooString;
+
+    for (int i = 0; i < this->size; i++)
+    {
+        zooString += stocks[i].getString() + "\n";
+    }
+
+    return zooString;
 }
 
 int zoo::getNumstock()
@@ -110,12 +141,30 @@ int zoo::getNumstock()
 
 int zoo::numPen(string penId)
 {
-    return 0;
+    int counter = 0;
+
+    for (int i = 0; i < this->size; i++)
+    {
+        if (this->stocks[i].getEnclosurePen() == penId)
+        {
+            counter ++;
+        }
+    }
+    return counter;
 }
 
 int zoo::numClass(string className)
 {
-    return 0;
+    int counter = 0;
+
+    for (int i = 0; i < this->size; i++)
+    {
+        if (this->stocks[i].getAnimal().getName() == className)
+        {
+            counter ++;
+        }
+    }
+    return counter;
 }
 
 bool zoo::checkInt(string text)
