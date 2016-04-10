@@ -15,7 +15,6 @@ void zoo::loadZoo(string file)
     string text = "";
     bool gotSize = false;
     int counter = 0;
-    int stockCounter = 0;
 
     // open stream to file
     fin.open(file.c_str(), ios::in);
@@ -31,7 +30,7 @@ void zoo::loadZoo(string file)
             getline(fin, text);
             if (fin.good()) 
             {
-                this->getStock(gotSize, stockCounter, counter, stringList, text);
+                this->getStock(gotSize, counter, stringList, text);
                 this->getSize(gotSize, text);
                 // cout << text << "\n";
             } 
@@ -62,7 +61,6 @@ void zoo::getSize(bool &gotSize, string text)
         if (this->checkInt(text))
         {
             this->size = atoi(text.c_str());
-            this->stocks = new stock[this->size];
             gotSize = true;
         }
         else
@@ -72,7 +70,7 @@ void zoo::getSize(bool &gotSize, string text)
     }
 }
 
-void zoo::getStock(bool gotSize, int &stockCounter, int &counter, string *stringList, string text)
+void zoo::getStock(bool gotSize, int &counter, string *stringList, string text)
 {
     if (gotSize == true)
     {
@@ -83,8 +81,7 @@ void zoo::getStock(bool gotSize, int &stockCounter, int &counter, string *string
         {
             counter = -1;
 
-            this->stocks[stockCounter]= stock(stringList[0], stringList[1], stringList[2], stringList[3], stringList[4], stringList[5]);
-            stockCounter ++;
+            this->stocks.pushBack(stock(stringList[0], stringList[1], stringList[2], stringList[3], stringList[4], stringList[5]));
         }  
 
         counter ++;
@@ -190,4 +187,44 @@ bool zoo::checkChar(string text)
     {
         return false;
     }
+}
+
+vectorspc::Vector<stock> zoo::getPenStock(const string &pen) const
+{
+    vectorspc::Vector<stock> stocks;
+    // stringstream ss;
+    // string test = "";
+
+    // ss << this->stocks.find(pen);
+    // test = ss.str();
+    // ss.str("");
+
+    // cout << "\n\n" << test;
+
+    for (int i=0; i<this->stocks.size(); i++)
+    {
+        if (pen == this->stocks[i].getEnclosurePen())
+        {
+            stocks.pushBack(this->stocks[i]);
+        }
+    }
+
+    if (stocks.size() == 0)
+    {
+        throw logic_error("No stocks with pen " + pen);
+    }
+
+    return stocks;
+}
+
+string zoo::getPenStockString(const string &pen) const 
+{
+    vectorspc::Vector<stock> stocks = this->getPenStock(pen);
+    string stockString = "";
+
+    for (int i=0; i<stocks.size(); i++)
+    {
+        stockString += stocks[i].getString() + "\n";
+    }
+    return stockString;
 }

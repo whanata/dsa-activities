@@ -5,13 +5,15 @@
 #include <string>
 
 #include "stock.h"
+#include "vector.h"
 
 using namespace std;
       
 class zoo
 { 
    private: 
-      stock *stocks; 
+      // stock *stocks; 
+      vectorspc::Vector<stock> stocks;
       int size;
       
    public: 
@@ -22,55 +24,56 @@ class zoo
       int numClass(string className);
       bool checkInt(string text);
       void getSize(bool &gotSize, string text);
-      void getStock(bool gotSize, int &stockCounter, int &counter, string *stringList, string text);
+      void getStock(bool gotSize, int &counter, string *stringList, string text);
       bool checkChar(string text);
       string getString() const;
+      vectorspc::Vector<stock> getPenStock(const string &pen) const;
+      string getPenStockString(const string &pen) const;
 
       zoo() 
       { 
          size = 0; 
-         stocks = NULL;
       } 
       
-      zoo(const zoo &other) 
-      { 
-         // copy constructor 
-         stocks = NULL; 
-         // make use of overloaded = operator to reduce code duplication
-         *this = other; 
-      } 
+      // zoo(const zoo &other) 
+      // { 
+      //    // copy constructor 
+      //    stocks = NULL; 
+      //    // make use of overloaded = operator to reduce code duplication
+      //    *this = other; 
+      // } 
       
-      ~zoo() 
-      { 
-         // destructor
-         if (stocks != NULL) 
-         {
-            delete [] stocks; 
-         }
-      } 
+      // ~zoo() 
+      // { 
+      //    // destructor
+      //    if (stocks != NULL) 
+      //    {
+      //       delete [] stocks; 
+      //    }
+      // } 
       
-      zoo& operator = (const zoo &otherZoo) 
-      { 
-         // clean up any allocated memory 
-         if (stocks != NULL)  
-         { 
-            delete [] stocks; 
-            stocks = NULL; 
-         } 
+      // zoo& operator = (const zoo &otherZoo) 
+      // { 
+      //    // clean up any allocated memory 
+      //    if (stocks != NULL)  
+      //    { 
+      //       delete [] stocks; 
+      //       stocks = NULL; 
+      //    } 
          
-         size = otherZoo.size; 
-         if (size > 0) 
-         { 
-            // create a new stocks 
-            stocks = new stock[size]; 
+      //    size = otherZoo.size; 
+      //    if (size > 0) 
+      //    { 
+      //       // create a new stocks 
+      //       stocks = new stock[size]; 
             
-            // copy the contents of other stocks to this stocks 
-            for (int i=0; i<size; i++)  
-            {
-               stocks[i] = otherZoo.stocks[i]; 
-            }
-         } 
-      } 
+      //       // copy the contents of other stocks to this stocks 
+      //       for (int i=0; i<size; i++)  
+      //       {
+      //          stocks[i] = otherZoo.stocks[i]; 
+      //       }
+      //    } 
+      // } 
 };
 
 #endif
