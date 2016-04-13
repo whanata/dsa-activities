@@ -27,7 +27,7 @@ class zoo
       void getStock(bool gotSize, int &counter, string *stringList, string text);
       bool checkChar(string text);
       string getString() const;
-      vectorspc::Vector<stock> getPenStock(const string &pen) const;
+      vectorspc::Vector<stock> *getPenStock(const string &pen) const;
       string getPenStockString(const string &pen) const;
 
       zoo() 

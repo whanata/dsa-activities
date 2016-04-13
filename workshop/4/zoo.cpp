@@ -189,9 +189,9 @@ bool zoo::checkChar(string text)
     }
 }
 
-vectorspc::Vector<stock> zoo::getPenStock(const string &pen) const
+vectorspc::Vector<stock> *zoo::getPenStock(const string &pen) const
 {
-    vectorspc::Vector<stock> stocks;
+    vectorspc::Vector<stock> *stocks = new vectorspc::Vector<stock>;
     // stringstream ss;
     // string test = "";
 
@@ -205,11 +205,11 @@ vectorspc::Vector<stock> zoo::getPenStock(const string &pen) const
     {
         if (pen == this->stocks[i].getEnclosurePen())
         {
-            stocks.pushBack(this->stocks[i]);
+            stocks->pushBack(this->stocks[i]);
         }
     }
 
-    if (stocks.size() == 0)
+    if (stocks->size() == 0)
     {
         throw logic_error("No stocks with pen " + pen);
     }
@@ -219,12 +219,14 @@ vectorspc::Vector<stock> zoo::getPenStock(const string &pen) const
 
 string zoo::getPenStockString(const string &pen) const 
 {
-    vectorspc::Vector<stock> stocks = this->getPenStock(pen);
+    vectorspc::Vector<stock> *stocks = this->getPenStock(pen);
     string stockString = "";
 
-    for (int i=0; i<stocks.size(); i++)
+    for (int i=0; i<stocks->size(); i++)
     {
-        stockString += stocks[i].getString() + "\n";
+        stockString += stocks->at(i).getString() + "\n";
     }
+
+    delete stocks;
     return stockString;
 }
