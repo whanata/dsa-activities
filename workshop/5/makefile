@@ -4,7 +4,7 @@ prog: main.o zoo.o
 main.o: main.cpp zoo.h
 	$(CC) -c main.cpp
 zoo.o: zoo.cpp zoo.h stock.o
-	$(CC) -c zoo.cpp 
+	$(CC) -c zoo.cpp
 stock.o: stock.cpp stock.h animal.o
 	$(CC) -c stock.cpp
 animal.o: animal.cpp animal.h 
